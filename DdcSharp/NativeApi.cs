@@ -49,7 +49,6 @@ namespace DdcSharp
         /// <param name="pdtyDisplayTechnologyType">Receives the technology type, specified as a member of the MC_DISPLAY_TECHNOLOGY_TYPE enumeration.</param>
         /// <returns></returns>
         [DllImport("dxva2.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetMonitorTechnologyType(IntPtr hMonitor, ref MC_DISPLAY_TECHNOLOGY_TYPE pdtyDisplayTechnologyType);
 
         /// <summary>
@@ -61,7 +60,6 @@ namespace DdcSharp
         /// <param name="pdwSupportedColorTemperatures">Receives a bitwise OR of color temperature flags. See Remarks.</param>
         /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
         [DllImport("dxva2.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetMonitorCapabilities(IntPtr hMonitor, ref MonitorCapabilities pdwMonitorCapabilities,
                                                          ref SupportedColorTemperatures pdwSupportedColorTemperatures);
 
@@ -72,7 +70,6 @@ namespace DdcSharp
         /// <param name="hMonitor">Handle to a physical monitor.</param>
         /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
         [DllImport("dxva2.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DestroyPhysicalMonitors(IntPtr hMonitor);
 
         /// <summary>
@@ -83,7 +80,6 @@ namespace DdcSharp
         /// <param name="pdwNumberOfPhysicalMonitors">Receives the number of physical monitors associated with the monitor handle.</param>
         /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
         [DllImport("dxva2.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetNumberOfPhysicalMonitorsFromHMONITOR(IntPtr hMonitor, ref uint pdwNumberOfPhysicalMonitors);
 
         /// <summary>
@@ -95,7 +91,6 @@ namespace DdcSharp
         /// <param name="pPhysicalMonitorArray">Pointer to an array of PHYSICAL_MONITOR structures. The caller must allocate the array.</param>
         /// <returns></returns>
         [DllImport("dxva2.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetPhysicalMonitorsFromHMONITOR(IntPtr hMonitor, uint dwPhysicalMonitorArraySize,
                                                                   [Out] PHYSICAL_MONITOR[] pPhysicalMonitorArray);
 
@@ -110,7 +105,6 @@ namespace DdcSharp
         /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
         /// <remarks>This function takes about 50 milliseconds to return.</remarks>
         [DllImport("dxva2.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
         // ReSharper disable once InconsistentNaming
         public static extern bool SetVCPFeature(IntPtr hMonitor, byte bVCPCode, uint dwNewValue);
 
@@ -122,7 +116,6 @@ namespace DdcSharp
         /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
         /// <remarks>This function takes about 50 milliseconds to return. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_BRIGHTNESS flag.</remarks>
         [DllImport("dxva2.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetMonitorBrightness(IntPtr hMonitor, uint dwNewBrightness);
 
         /// <summary>
@@ -135,7 +128,6 @@ namespace DdcSharp
         /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
         /// <remarks>This function takes about 40 milliseconds to return. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_BRIGHTNESS flag.</remarks>
         [DllImport("dxva2.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetMonitorBrightness(IntPtr hMonitor, ref uint pdwMinimumBrightness, ref uint pdwCurrentBrightness,
                                                        ref uint pdwMaximumBrightness);
     }
