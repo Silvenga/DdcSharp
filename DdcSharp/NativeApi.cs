@@ -34,6 +34,7 @@ namespace DdcSharp
 
         /// <summary>
         /// The GetMonitorInfo function retrieves information about a display monitor.
+        /// https://msdn.microsoft.com/en-us/library/windows/desktop/dd144901(v=vs.85).aspx
         /// </summary>
         /// <param name="hMonitor">A handle to the display monitor of interest.</param>
         /// <param name="lpmi">A pointer to a MONITORINFO or MONITORINFOEX structure that receives information about the specified display monitor.</param>
