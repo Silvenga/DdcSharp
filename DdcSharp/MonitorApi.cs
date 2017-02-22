@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using DdcSharp.Models;
 
@@ -37,17 +38,36 @@ namespace DdcSharp
                     return true;
                 }, IntPtr.Zero);
 
-            return monitors;
+            foreach (var displayInfo in monitors)
+            {
+                displayInfo.PhysicalMonitors = GetPysicalMonitors(displayInfo.MonitorHandler).ToList();
+
+                yield return displayInfo;
+            }
         }
 
-        public void GetPysicalMonitors(IntPtr hMonitor)
+        public IEnumerable<MonitorInfo> GetPysicalMonitors(IntPtr hMonitor)
         {
             uint numberOfPhysicalMonitors = 0;
             var success = NativeApi.GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor, ref numberOfPhysicalMonitors);
             if (success)
             {
                 var physicalMonitors = new PHYSICAL_MONITOR[numberOfPhysicalMonitors];
-                success = NativeApi.GetPhysicalMonitorsFromHMONITOR(hMonitor, numberOfPhysicalMonitors, physicalMonitors);
+                NativeApi.GetPhysicalMonitorsFromHMONITOR(hMonitor, numberOfPhysicalMonitors, physicalMonitors);
+                foreach (var physicalMonitor in physicalMonitors)
+                {
+                    MonitorCapabilities pdwMonitorCapabilities = 0;
+                    SupportedColorTemperatures pdwSupportedColorTemperatures = 0;
+                    NativeApi.GetMonitorCapabilities(physicalMonitor.PhysicalMonitorHandler, ref pdwMonitorCapabilities, ref pdwSupportedColorTemperatures);
+
+                    yield return new MonitorInfo
+                    {
+                        Capabilities = pdwMonitorCapabilities,
+                        SupportedColorTemperatures = pdwSupportedColorTemperatures,
+                        MonitorHandler = physicalMonitor.PhysicalMonitorHandler,
+                        Description = physicalMonitor.PhysicalMonitorDescription
+                    };
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DdcSharp.Models
 {
@@ -12,15 +13,14 @@ namespace DdcSharp.Models
         public RECT MonitorArea { get; set; }
         public RECT WorkArea { get; set; }
 
-        public IList<PHYSICAL_MONITOR> PhysicalMonitors { get; set; }
+        public IList<MonitorInfo> PhysicalMonitors { get; set; }
 
         public void Dispose()
         {
+            foreach (var physicalMonitor in PhysicalMonitors ?? Enumerable.Empty<MonitorInfo>())
+            {
+                physicalMonitor?.Dispose();
+            }
         }
-    }
-
-    public class MonitorInfo
-    {
-        
     }
 }

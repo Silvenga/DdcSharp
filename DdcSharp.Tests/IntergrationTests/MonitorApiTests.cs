@@ -14,9 +14,7 @@ namespace DdcSharp.Tests.IntergrationTests
             var api = new MonitorApi();
 
             // Act
-            var displays = api.GetDisplays();
-            var secondary = displays.First(x => x.Availability != MONITORINFOEX_FLAGS.MONITORINFOF_PRIMARY);
-            api.GetPysicalMonitors(secondary.MonitorHandler);
+            var displays = api.GetDisplays().ToList();
 
             // Assert
         }

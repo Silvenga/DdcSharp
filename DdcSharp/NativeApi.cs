@@ -5,7 +5,7 @@ using DdcSharp.Models;
 
 namespace DdcSharp
 {
-    public class NativeApi
+    public static class NativeApi
     {
         /// <summary>
         /// The EnumDisplayMonitors function enumerates display monitors (including invisible pseudo-monitors associated with the mirroring drivers) 
@@ -62,19 +62,18 @@ namespace DdcSharp
         /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
         [DllImport("dxva2.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool GetMonitorCapabilities(IntPtr hMonitor, ref uint pdwMonitorCapabilities, ref uint pdwSupportedColorTemperatures);
+        public static extern bool GetMonitorCapabilities(IntPtr hMonitor, ref MonitorCapabilities pdwMonitorCapabilities,
+                                                         ref SupportedColorTemperatures pdwSupportedColorTemperatures);
 
         /// <summary>
-        /// Closes an array of physical monitor handles. 
-        /// Call this function to close an array of monitor handles obtained from the GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9 function.
-        /// https://msdn.microsoft.com/en-us/library/windows/desktop/dd692937(v=vs.85).aspx
+        /// Closes a handle to a physical monitor. Call this function to close a monitor handle obtained from the GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9 function.
+        /// https://msdn.microsoft.com/en-us/library/windows/desktop/dd692936(v=vs.85).aspx
         /// </summary>
-        /// <param name="dwPhysicalMonitorArraySize">Number of elements in the pPhysicalMonitorArray array.</param>
-        /// <param name="pPhysicalMonitorArray">Pointer to an array of PHYSICAL_MONITOR structures.</param>
+        /// <param name="hMonitor">Handle to a physical monitor.</param>
         /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
         [DllImport("dxva2.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool DestroyPhysicalMonitors(uint dwPhysicalMonitorArraySize, ref PHYSICAL_MONITOR[] pPhysicalMonitorArray);
+        public static extern bool DestroyPhysicalMonitors(IntPtr hMonitor);
 
         /// <summary>
         /// Retrieves the number of physical monitors associated with an HMONITOR monitor handle. Call this function before calling GetPhysicalMonitorsFromHMONITOR.
