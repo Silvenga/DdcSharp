@@ -11,6 +11,7 @@ namespace DdcSharp
         // Refs
         // http://stackoverflow.com/q/846518/2001966
         // http://stackoverflow.com/a/18065609/2001966
+        // Monitor functions - https://msdn.microsoft.com/en-us/library/windows/desktop/dd692964(v=vs.85).aspx
 
         public IEnumerable<DisplayInfo> GetDisplays()
         {

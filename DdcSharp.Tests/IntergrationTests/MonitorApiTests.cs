@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 
-using DdcSharp.Models;
-
 using Xunit;
 
 namespace DdcSharp.Tests.IntergrationTests
@@ -15,6 +13,10 @@ namespace DdcSharp.Tests.IntergrationTests
 
             // Act
             var displays = api.GetDisplays().ToList();
+
+            var pys = displays.First().PhysicalMonitors.First();
+            
+            NativeApi.SetMonitorBrightness(pys.MonitorHandler, 40);
 
             // Assert
         }

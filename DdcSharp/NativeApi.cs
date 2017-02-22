@@ -98,5 +98,45 @@ namespace DdcSharp
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetPhysicalMonitorsFromHMONITOR(IntPtr hMonitor, uint dwPhysicalMonitorArraySize,
                                                                   [Out] PHYSICAL_MONITOR[] pPhysicalMonitorArray);
+
+        /// <summary>
+        /// Sets the value of a Virtual Control Panel (VCP) code for a monitor.
+        /// </summary>
+        /// <param name="hMonitor">Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9.</param>
+        /// <param name="bVCPCode">VCP code to set. 
+        /// The VCP codes are defined in the VESA Monitor Control Command Set (MCCS) standard, version 1.0 and 2.0. 
+        /// This parameter must specify a continuous or non-continuous VCP, or a vendor-specific code. It should not be a table control code.</param>
+        /// <param name="dwNewValue">Value of the VCP code.</param>
+        /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
+        /// <remarks>This function takes about 50 milliseconds to return.</remarks>
+        [DllImport("dxva2.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        // ReSharper disable once InconsistentNaming
+        public static extern bool SetVCPFeature(IntPtr hMonitor, byte bVCPCode, uint dwNewValue);
+
+        /// <summary>
+        /// Sets a monitor's brightness value. Increasing the brightness value makes the display on the monitor brighter, and decreasing it makes the display dimmer.
+        /// </summary>
+        /// <param name="hMonitor">Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9.</param>
+        /// <param name="dwNewBrightness">Brightness value. To get the monitor's minimum and maximum brightness values, call GetMonitorBrightness.</param>
+        /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
+        /// <remarks>This function takes about 50 milliseconds to return. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_BRIGHTNESS flag.</remarks>
+        [DllImport("dxva2.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetMonitorBrightness(IntPtr hMonitor, uint dwNewBrightness);
+
+        /// <summary>
+        /// Retrieves a monitor's minimum, maximum, and current brightness settings.
+        /// </summary>
+        /// <param name="hMonitor">Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9.</param>
+        /// <param name="pdwMinimumBrightness">Receives the monitor's minimum brightness.</param>
+        /// <param name="pdwCurrentBrightness">Receives the monitor's current brightness.</param>
+        /// <param name="pdwMaximumBrightness">Receives the monitor's maximum brightness.</param>
+        /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError.</returns>
+        /// <remarks>This function takes about 40 milliseconds to return. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_BRIGHTNESS flag.</remarks>
+        [DllImport("dxva2.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetMonitorBrightness(IntPtr hMonitor, ref uint pdwMinimumBrightness, ref uint pdwCurrentBrightness,
+                                                       ref uint pdwMaximumBrightness);
     }
 }
