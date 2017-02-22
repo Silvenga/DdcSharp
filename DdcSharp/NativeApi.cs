@@ -96,6 +96,7 @@ namespace DdcSharp
         /// <returns></returns>
         [DllImport("dxva2.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool GetPhysicalMonitorsFromHMONITOR(IntPtr hMonitor, uint dwPhysicalMonitorArraySize, [Out] PHYSICAL_MONITOR[] pPhysicalMonitorArray);
+        public static extern bool GetPhysicalMonitorsFromHMONITOR(IntPtr hMonitor, uint dwPhysicalMonitorArraySize,
+                                                                  [Out] PHYSICAL_MONITOR[] pPhysicalMonitorArray);
     }
 }
