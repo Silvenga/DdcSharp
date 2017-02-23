@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using DdcSharp.Models;
+using DdcSharp.Native;
+using DdcSharp.Native.Models;
 
 namespace DdcSharp
 {

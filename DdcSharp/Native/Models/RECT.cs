@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace DdcSharp.Models
+namespace DdcSharp.Native.Models
 {
     [StructLayout(LayoutKind.Sequential)]
     [SuppressMessage("ReSharper", "InconsistentNaming")]

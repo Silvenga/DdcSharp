@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace DdcSharp.Models
+namespace DdcSharp.Native.Models
 {
     [Flags]
     [SuppressMessage("ReSharper", "InconsistentNaming")]

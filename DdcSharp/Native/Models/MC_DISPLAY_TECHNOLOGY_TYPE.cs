@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace DdcSharp.Models
+namespace DdcSharp.Native.Models
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("ReSharper", "FieldCanBeMadeReadOnly.Global")]

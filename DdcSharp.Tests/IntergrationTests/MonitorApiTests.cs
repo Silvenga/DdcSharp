@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 
+using DdcSharp.Native;
+
 using Xunit;
 
 namespace DdcSharp.Tests.IntergrationTests

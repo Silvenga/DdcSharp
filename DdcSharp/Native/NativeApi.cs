@@ -2,8 +2,9 @@ using System;
 using System.Runtime.InteropServices;
 
 using DdcSharp.Models;
+using DdcSharp.Native.Models;
 
-namespace DdcSharp
+namespace DdcSharp.Native
 {
     public static class NativeApi
     {

@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-namespace DdcSharp.Models
+namespace DdcSharp.Native.Models
 {
     /// <summary>
     /// The MONITORINFOEX structure contains information about a display monitor.

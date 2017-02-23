@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-namespace DdcSharp.Models
+namespace DdcSharp.Native.Models
 {
     /// <summary>
     /// Contains a handle and text description corresponding to a physical monitor.

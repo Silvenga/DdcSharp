@@ -1,5 +1,7 @@
 ﻿using System;
 
+using DdcSharp.Native;
+
 namespace DdcSharp.Models
 {
     public class MonitorInfo : IDisposable

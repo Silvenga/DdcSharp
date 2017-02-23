@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using DdcSharp.Native;
+using DdcSharp.Native.Models;
+
 namespace DdcSharp.Models
 {
     public class DisplayInfo : IDisposable
