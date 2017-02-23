@@ -41,18 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\MC_DISPLAY_TECHNOLOGY_TYPE.cs" />
+    <Compile Include="Models\VirtualDisplay.cs" />
+    <Compile Include="Native\Models\MC_DISPLAY_TECHNOLOGY_TYPE.cs" />
     <Compile Include="Models\DisplayInfo.cs" />
     <Compile Include="Models\MonitorInfo.cs" />
-    <Compile Include="Models\MONITORINFOEX_FLAGS.cs" />
-    <Compile Include="Models\PHYSICAL_MONITOR.cs" />
+    <Compile Include="Native\Models\MONITORINFOEX_FLAGS.cs" />
+    <Compile Include="Native\Models\PHYSICAL_MONITOR.cs" />
     <Compile Include="Models\SupportedColorTemperatures.cs" />
     <Compile Include="MonitorApi.cs" />
-    <Compile Include="Models\MONITORINFOEX.cs" />
+    <Compile Include="Native\Models\MONITORINFOEX.cs" />
     <Compile Include="Models\MonitorCapabilities.cs" />
-    <Compile Include="NativeApi.cs" />
+    <Compile Include="Native\NativeApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\RECT.cs" />
+    <Compile Include="Native\Models\RECT.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
