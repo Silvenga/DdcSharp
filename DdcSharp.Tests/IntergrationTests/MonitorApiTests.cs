@@ -14,11 +14,11 @@ namespace DdcSharp.Tests.IntergrationTests
             var api = new MonitorApi();
 
             // Act
-            var displays = api.GetDisplays().ToList();
+            var displays = api.GetDisplays().ToList(); 
 
-            var pys = displays.First().PhysicalMonitors.First();
+            var pys = displays.First().PhysicalDisplays.First();
             
-            NativeApi.SetMonitorBrightness(pys.MonitorHandler, 40);
+            NativeApi.SetMonitorBrightness(pys.Handle, 40);
 
             // Assert
         }

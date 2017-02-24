@@ -31,7 +31,7 @@ namespace DdcSharp.Native
         /// <param name="lprcMonitor">A pointer to a RECT structure.</param>
         /// <param name="dwData">Application-defined data that EnumDisplayMonitors passes directly to the enumeration function.</param>
         /// <returns></returns>
-        public delegate bool MonitorEnumDelegate(IntPtr hMonitor, IntPtr hdcMonitor, ref RECT lprcMonitor, IntPtr dwData);
+        public delegate bool MonitorEnumDelegate(IntPtr hMonitor, IntPtr hdcMonitor, RECT lprcMonitor, IntPtr dwData);
 
         /// <summary>
         /// The GetMonitorInfo function retrieves information about a display monitor.

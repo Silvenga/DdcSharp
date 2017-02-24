@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DdcSharp", "DdcSharp\DdcSha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DdcSharp.Tests", "DdcSharp.Tests\DdcSharp.Tests.csproj", "{8BD8B655-6461-4995-89DC-38F6553FA55B}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DdcSharp.Core", "DdcSharp.Core\DdcSharp.Core.fsproj", "{6BE8F0C8-325C-492A-AF98-E28DBC5CDA2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8BD8B655-6461-4995-89DC-38F6553FA55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BD8B655-6461-4995-89DC-38F6553FA55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BD8B655-6461-4995-89DC-38F6553FA55B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BE8F0C8-325C-492A-AF98-E28DBC5CDA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BE8F0C8-325C-492A-AF98-E28DBC5CDA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BE8F0C8-325C-492A-AF98-E28DBC5CDA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BE8F0C8-325C-492A-AF98-E28DBC5CDA2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

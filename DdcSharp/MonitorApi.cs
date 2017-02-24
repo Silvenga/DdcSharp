@@ -15,26 +15,24 @@ namespace DdcSharp
         // http://stackoverflow.com/a/18065609/2001966
         // Monitor functions - https://msdn.microsoft.com/en-us/library/windows/desktop/dd692964(v=vs.85).aspx
 
-        public IEnumerable<DisplayInfo> GetDisplays()
+        public IEnumerable<VirtualDisplay> GetDisplays()
         {
-            var monitors = new List<DisplayInfo>();
+            var monitors = new List<VirtualDisplay>();
 
             NativeApi.EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero,
-                delegate(IntPtr hMonitor, IntPtr hdcMonitor, ref RECT lprcMonitor, IntPtr dwData)
+                delegate(IntPtr hMonitor, IntPtr hdcMonitor, RECT lprcMonitor, IntPtr dwData)
                 {
                     var monitorInfo = new MONITORINFOEX();
                     monitorInfo.Init();
                     var success = NativeApi.GetMonitorInfo(hMonitor, ref monitorInfo);
                     if (success)
                     {
-                        var displayInfo = new DisplayInfo
+                        var displayInfo = new VirtualDisplay
                         {
-                            ScreenWidth = monitorInfo.Monitor.Width,
-                            ScreenHeight = monitorInfo.Monitor.Height,
-                            MonitorArea = monitorInfo.Monitor,
-                            WorkArea = monitorInfo.WorkArea,
-                            Availability = monitorInfo.Flags,
-                            MonitorHandler = hMonitor
+                            Width = monitorInfo.Monitor.Width,
+                            Height = monitorInfo.Monitor.Height,
+                            IsPrimary = monitorInfo.Flags.HasFlag(MONITORINFOEX_FLAGS.MONITORINFOF_PRIMARY),
+                            Handle = hMonitor
                         };
                         monitors.Add(displayInfo);
                     }
@@ -43,13 +41,13 @@ namespace DdcSharp
 
             foreach (var displayInfo in monitors)
             {
-                displayInfo.PhysicalMonitors = GetPysicalMonitors(displayInfo.MonitorHandler).ToList();
+                displayInfo.PhysicalDisplays = GetPysicalMonitors(displayInfo.Handle).ToList();
 
                 yield return displayInfo;
             }
         }
 
-        public IEnumerable<MonitorInfo> GetPysicalMonitors(IntPtr hMonitor)
+        public IEnumerable<PhysicalDisplay> GetPysicalMonitors(IntPtr hMonitor)
         {
             uint numberOfPhysicalMonitors = 0;
             var success = NativeApi.GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor, ref numberOfPhysicalMonitors);
@@ -63,13 +61,13 @@ namespace DdcSharp
                     SupportedColorTemperatures pdwSupportedColorTemperatures = 0;
                     NativeApi.GetMonitorCapabilities(physicalMonitor.PhysicalMonitorHandler, ref pdwMonitorCapabilities, ref pdwSupportedColorTemperatures);
 
-                    yield return new MonitorInfo
-                    {
-                        Capabilities = pdwMonitorCapabilities,
-                        SupportedColorTemperatures = pdwSupportedColorTemperatures,
-                        MonitorHandler = physicalMonitor.PhysicalMonitorHandler,
-                        Description = physicalMonitor.PhysicalMonitorDescription
-                    };
+                    yield return
+                        new PhysicalDisplay(
+                            () => NativeApi.DestroyPhysicalMonitors(physicalMonitor.PhysicalMonitorHandler),
+                            physicalMonitor.PhysicalMonitorHandler,
+                            pdwMonitorCapabilities,
+                            pdwSupportedColorTemperatures
+                        );
                 }
             }
         }
