@@ -51,7 +51,10 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Library1.fs" />
+    <Compile Include="NativeModels.fs" />
+    <Compile Include="NativeApis.fs" />
+    <Compile Include="MonitorModels.fs" />
+    <Compile Include="MonitorApi.fs" />
     <None Include="Script.fsx" />
     <Content Include="packages.config" />
   </ItemGroup>

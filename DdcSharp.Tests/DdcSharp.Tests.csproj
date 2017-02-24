@@ -71,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DdcSharp.Core\DdcSharp.Core.fsproj">
+      <Project>{6be8f0c8-325c-492a-af98-e28dbc5cda2f}</Project>
+      <Name>DdcSharp.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DdcSharp\DdcSharp.csproj">
       <Project>{9BE15A7E-EB6A-407F-AB9D-BFC16D6A355E}</Project>
       <Name>DdcSharp</Name>
