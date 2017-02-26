@@ -55,7 +55,6 @@
     <Compile Include="NativeApis.fs" />
     <Compile Include="MonitorModels.fs" />
     <Compile Include="MonitorApi.fs" />
-    <None Include="Script.fsx" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
