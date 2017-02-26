@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using DdcSharp.Core;
 
-using DdcSharp.Core;
+using FluentAssertions;
 
 using Xunit;
 
@@ -16,11 +16,9 @@ namespace DdcSharp.Tests.IntergrationTests
             // Act
             var displays = api.GetDisplays();
 
-            var pys = displays.First().PhysicalDisplays.First();
-            
-            //NativeApi.SetMonitorBrightness(pys.Handle, 40);
-
             // Assert
+
+            displays.Should().HaveCount(2);
         }
     }
 }

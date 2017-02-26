@@ -18,7 +18,7 @@ namespace DdcSharp.Native.Models
         // https://msdn.microsoft.com/en-us/library/windows/desktop/dd145066(v=vs.85).aspx
 
         // size of a device name string
-        private const int CCHDEVICENAME = 32;
+        //private const int CCHDEVICENAME = 32;
 
         /// <summary>
         /// The size, in bytes, of the structure. Set this member to sizeof(MONITORINFOEX) (72) before calling the GetMonitorInfo function. 
@@ -52,11 +52,11 @@ namespace DdcSharp.Native.Models
         /// A string that specifies the device name of the monitor being used. Most applications have no use for a display monitor name, 
         /// and so can save some bytes by using a MONITORINFO structure.
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CCHDEVICENAME)] public string DeviceName;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string DeviceName;
 
         public void Init()
         {
-            this.Size = 40 + 2 * CCHDEVICENAME;
+            this.Size = 40 + 2 * 32;
             this.DeviceName = string.Empty;
         }
     }

@@ -3,7 +3,6 @@
 open System
 open NativeModels
 open System.Collections.Generic
-open DdcSharp.Models
 
 type PhysicalDisplay(capabilities : MonitorCapabilities, colorTemperatures : SupportedColorTemperatures) =
     member val Handle = IntPtr.Zero with get, set
