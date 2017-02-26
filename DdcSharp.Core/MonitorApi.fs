@@ -9,7 +9,7 @@ open System.Runtime.InteropServices
 open System.Linq
 
 type MonitorInfo = 
-    { Handle : IntPtr
+    { PHYSICAL_MONITOR : PHYSICAL_MONITOR
       MonitorCapabilities : MonitorCapabilities
       SupportedColorTemperatures : SupportedColorTemperatures }
 
@@ -28,7 +28,7 @@ type MonitorApi() =
                 let virtualDisplay = 
                     new VirtualDisplay(Width = monitorInfo.Monitor.Width, Height = monitorInfo.Monitor.Height, 
                                        IsPrimary = monitorInfo.Flags.HasFlag(MONITORINFOEX_FLAGS.MONITORINFOF_PRIMARY), 
-                                       Handle = hMonitor)
+                                       Handle = hMonitor, Name = monitorInfo.DeviceName)
                 monitors.Add(virtualDisplay)
             | _ -> failwithf "Failed with error %i." (Marshal.GetLastWin32Error())
             true
@@ -51,6 +51,7 @@ type MonitorApi() =
             | true -> 
                 let mutable inMonitors = Array.zeroCreate (int32 (numberOfPhysicalMonitors))
                 let success = GetPhysicalMonitorsFromHMONITOR(hMonitor, numberOfPhysicalMonitors, inMonitors)
+                if not success then failwithf "Failed with error %i." (Marshal.GetLastWin32Error())
                 inMonitors
             | false -> [||]
         
@@ -63,11 +64,13 @@ type MonitorApi() =
             if not success then failwithf "Failed with error %i." (Marshal.GetLastWin32Error())
             { MonitorCapabilities = pdwMonitorCapabilities
               SupportedColorTemperatures = pdwSupportedColorTemperatures
-              Handle = physicalMonitor.PhysicalMonitorHandler }
+              PHYSICAL_MONITOR = physicalMonitor }
         
         let getPhysicalDisplay (info : MonitorInfo) = 
-            new PhysicalDisplay(Handle = info.Handle, capabilities = info.MonitorCapabilities, 
-                                colorTemperatures = info.SupportedColorTemperatures)
+            new PhysicalDisplay(Handle = info.PHYSICAL_MONITOR.PhysicalMonitorHandler, 
+                                capabilities = info.MonitorCapabilities, 
+                                colorTemperatures = info.SupportedColorTemperatures, 
+                                Name = info.PHYSICAL_MONITOR.PhysicalMonitorDescription)
         physicalMonitors
         |> Array.map getInfo
         |> Array.map getPhysicalDisplay

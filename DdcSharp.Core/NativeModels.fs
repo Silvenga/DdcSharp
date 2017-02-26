@@ -1,32 +1,32 @@
-﻿module NativeModels
+﻿module DdcSharp.Core.NativeModels
 
 open System
 open System.Runtime.InteropServices
 
 [<StructAttribute>]
 [<StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)>]
-type PHYSICAL_MONITOR =
+type PHYSICAL_MONITOR = 
     val mutable PhysicalMonitorHandler : IntPtr
     [<MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)>]
     val mutable PhysicalMonitorDescription : string
 
 [<StructAttribute>]
 [<StructLayout(LayoutKind.Sequential)>]
-type RECT =
-    val mutable Left: int
-    val mutable Top: int
-    val mutable Right: int
-    val mutable Bottom: int
-    member this.Height with get() = this.Bottom - this.Top
-    member this.Width with get() = this.Right - this.Left
+type RECT = 
+    val mutable Left : int
+    val mutable Top : int
+    val mutable Right : int
+    val mutable Bottom : int
+    member this.Height = this.Bottom - this.Top
+    member this.Width = this.Right - this.Left
 
 [<FlagsAttribute>]
-type MONITORINFOEX_FLAGS =
+type MONITORINFOEX_FLAGS = 
     | MONITORINFOF_PRIMARY = 0
 
 [<StructAttribute>]
 [<StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)>]
-type MONITORINFOEX =
+type MONITORINFOEX = 
     val mutable Size : int
     val mutable Monitor : RECT
     val mutable WorkArea : RECT
@@ -34,9 +34,8 @@ type MONITORINFOEX =
     [<MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)>]
     val mutable DeviceName : string
 
-    
 [<FlagsAttribute>]
-type MonitorCapabilities =
+type MonitorCapabilities = 
     | MC_CAPS_BRIGHTNESS =                                   0b0_0000_0000_0001u
     | MC_CAPS_COLOR_TEMPERATURE =                            0b0_0000_0000_0010u
     | MC_CAPS_CONTRAST =                                     0b0_0000_0000_0100u
@@ -52,7 +51,7 @@ type MonitorCapabilities =
     | MC_RESTORE_FACTORY_DEFAULTS_ENABLES_MONITOR_SETTINGS = 0b1_0000_0000_0000u
 
 [<FlagsAttribute>]
-type SupportedColorTemperatures =
+type SupportedColorTemperatures = 
     | MC_SUPPORTED_COLOR_TEMPERATURE_NONE =   0b000000001u
     | MC_SUPPORTED_COLOR_TEMPERATURE_4000K =  0b000000010u
     | MC_SUPPORTED_COLOR_TEMPERATURE_5000K =  0b000000100u
@@ -64,3 +63,15 @@ type SupportedColorTemperatures =
     | MC_SUPPORTED_COLOR_TEMPERATURE_11500K = 0b100000000u
 
 type MonitorEnumDelegate = delegate of IntPtr * IntPtr * RECT * IntPtr -> bool
+
+[<FlagsAttribute>]
+type MC_DISPLAY_TECHNOLOGY_TYPE = 
+    | MC_SHADOW_MASK_CATHODE_RAY_TUBE      = 0b0000_0000_0001
+    | MC_APERTURE_GRILL_CATHODE_RAY_TUBE   = 0b0000_0000_0010
+    | MC_THIN_FILM_TRANSISTOR              = 0b0000_0000_0100
+    | MC_LIQUID_CRYSTAL_ON_SILICON         = 0b0000_0000_1000
+    | MC_PLASMA                            = 0b0000_0001_0000
+    | MC_ORGANIC_LIGHT_EMITTING_DIODE      = 0b0000_0010_0000
+    | MC_ELECTROLUMINESCENT                = 0b0000_0100_0000
+    | MC_MICROELECTROMECHANICAL            = 0b0000_1000_0000
+    | MC_FIELD_EMISSION_DEVICE             = 0b0001_0000_0000
