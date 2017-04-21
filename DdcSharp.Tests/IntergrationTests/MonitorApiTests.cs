@@ -1,4 +1,6 @@
-﻿using DdcSharp.Core;
+﻿using System.Linq;
+
+using DdcSharp.Core;
 
 using FluentAssertions;
 
@@ -14,7 +16,7 @@ namespace DdcSharp.Tests.IntergrationTests
             var api = new MonitorApi();
 
             // Act
-            var displays = api.GetDisplays();
+            var displays = api.GetDisplays().ToList();
 
             // Assert
 

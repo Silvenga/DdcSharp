@@ -15,7 +15,7 @@ type MonitorInfo =
 
 type MonitorApi() = 
     
-    member this.GetDisplays() : VirtualDisplay [] = 
+    member this.GetDisplays() : IEnumerable<VirtualDisplay> = 
         let monitors = new List<VirtualDisplay>()
         
         let callback (hMonitor : IntPtr) (hdcMonitor : IntPtr) (lprcMonitor : RECT) (dwData : IntPtr) = 
@@ -40,7 +40,6 @@ type MonitorApi() =
         |> Seq.map (fun display -> 
                display.PhysicalDisplays <- this.GetPysicalMonitors(display.Handle)
                display)
-        |> Enumerable.ToArray
     
     member this.GetPysicalMonitors(hMonitor : IntPtr) = 
         let mutable numberOfPhysicalMonitors = 0u
